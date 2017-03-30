@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" ng-app= "NarrowItDownApp">
+  <head>
+    <title>Narrow Down Your Menu Choice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+	<script src="scr/angular.min.js"></script>
+	<script src="scr/app2.js"></script>
+  </head>
+<body>
+   <div class="container">
+    <h1>Narrow Down Your Chinese Menu Choice</h1>
+
+    <div class="form-group">
+      <input type="text" placeholder="search term" class="form-control">
+    </div>
+    <div class="form-group narrow-button">
+      <button class="btn btn-primary"ng-click="menu.foundItems(1)">Narrow It Down For Me!</button>
+    </div>
+
+  <!--   found-items should be implemented as a component -->
+    <found-items found-items="...." on-remove="...."></found-items>
+  </div>
+  <!--
+  <div class="col-md-6" ng-controller='NarrowItDownController'>
+       <h2>To Buy:</h2>
+       <ul>
+           <li  ng-repeat="item in toBuy">Buy {{item.quantity}} of {{item.name}}(s)
+             <button ng-click ="setBuy(item)" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+
+        <li>{{toBuy}} <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+
+         <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+
+       </ul>
+       <div class="emptyMessage"> <span ng-if = "toBuy.length<=0" >Everything is bought! </span></div>
+     </div>-->
+     <div ng-controller='NarrowItDownController as menu'>
+     <h3>List of Menu Categories</h3>
+     <ul>
+       <li ng-repeat="item in menu.menu_items.menu_items">
+         (<a href="" ng-click="">{{ item.short_name }}</a>)
+         {{ item.name }}
+       </li>
+     </ul>
+   </div>
+</body>
+</html>
