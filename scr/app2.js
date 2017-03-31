@@ -9,36 +9,41 @@ angular.module('NarrowItDownApp', [])
 
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
-  var menu = this;
+	var menu = this;
+	var promise = MenuSearchService.getMenuCategories();
 
-  var promise = MenuSearchService.getMenuCategories();
+	promise.then(function (response) {
+		menu.categories = response.data;
+	})
+	.catch(function (error) {
+	console.log("Something went terribly wrong.");
+	});
+	var promise = MenuSearchService.getMenuitems();
 
-  promise.then(function (response) {
-    menu.categories = response.data;
-  })
-  .catch(function (error) {
-    console.log("Something went terribly wrong.");
-  });
-  var promise = MenuSearchService.getMenuitems();
+	promise.then(function (response) {
+	menu.menu_items = response.data;
+	//console.log(menu.menu_items.menu_items);
+	})
+	.catch(function (error) {
+	console.log("Something went terribly wrong.");
+	});
+	
+	menu.logMenuItems = function (shortName) {
+	var promise = MenuSearchService.getMenuitems();
 
-  promise.then(function (response) {
-    menu.menu_items = response.data;
-    console.log(menu.menu_items.menu_items);
-  })
-  .catch(function (error) {
-    console.log("Something went terribly wrong.");
-  });
-  menu.logMenuItems = function (shortName) {
-    var promise = MenuSearchService.getMenuForCategory(shortName);
-
-    promise.then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
-  };
-
+	promise.then(function (response) {
+	  console.log(response.data);
+	})
+	.catch(function (error) {
+	  console.log(error);
+	})
+	};
+	var searchValue = "beef";
+	function containsFilter(value) {
+	  return value.indexOf(searchValue) !== -1;
+	}
+	menu.menu_items
+	
 }
 
 
